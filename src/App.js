@@ -4,8 +4,11 @@ import Intro from './components/Intro.js';
 import posed from 'react-pose';
 
 const Box = posed.div({
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
+  visible: {
+    opacity: 1,
+    transition: { duration: 5000 }
+  },
+  hidden: { opacity: 0 }
 });
 
 class App extends Component {
@@ -13,7 +16,7 @@ class App extends Component {
     super();
     this.state = {
       page: 1,
-      isVisible: true
+      isVisible: false
     }
   }
 
@@ -24,9 +27,8 @@ class App extends Component {
   }
 
   componentDidMount () {
-    setInterval(() => {
       this.setState({ isVisible: !this.state.isVisible });
-    }, 1000);
+
     document.getElementById("App").addEventListener("click", this.nextPage.bind(this));
   }
 
@@ -38,7 +40,9 @@ class App extends Component {
     const { isVisible } = this.state;
     return (
       <div className="App" id="App">
-        <Box className="box" pose={isVisible ? 'visible' : 'hidden'} />
+        <Box className="box" pose={isVisible ? 'visible' : 'hidden'} >
+          <Intro />
+        </Box>
       </div>
     );
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Intro from './components/Intro.js';
-import posed from 'react-pose';
+import ChapterOne from './components/ChapterOne.js';
+import posed, { PoseGroup } from 'react-pose';
+
 
 const Box = posed.div({
   visible: {
@@ -28,8 +30,7 @@ class App extends Component {
 
   componentDidMount () {
       this.setState({ isVisible: !this.state.isVisible });
-
-    document.getElementById("App").addEventListener("click", this.nextPage.bind(this));
+      document.getElementById("App").addEventListener("click", this.nextPage.bind(this));
   }
 
   nextPage() {
@@ -37,14 +38,27 @@ class App extends Component {
   }
 
   render() {
-    const { isVisible } = this.state;
-    return (
-      <div className="App" id="App">
-        <Box className="box" pose={isVisible ? 'visible' : 'hidden'} >
-          <Intro />
-        </Box>
-      </div>
-    );
+    if (this.state.page === 1) {
+      const { isVisible } = this.state;
+      return (
+          <div className="App" id="App">
+          <Box className="box" pose={isVisible ? 'visible' : 'hidden'} >
+            <Intro />
+          </Box>
+        </div>
+      );
+    }
+
+    if (this.state.page === 2) {
+      const { isVisible } = this.state;
+      return (
+          <div className="App" id="App">
+          <Box className="box" pose={isVisible ? 'visible' : 'hidden'} >
+            <ChapterOne />
+          </Box>
+        </div>
+      );
+    }
   }
 }
 

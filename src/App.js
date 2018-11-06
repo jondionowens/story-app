@@ -5,6 +5,12 @@ import ChapterOne from './components/ChapterOne.js';
 import posed, { PoseGroup } from 'react-pose';
 import uniqid from 'uniqid';
 
+const Box = posed.div({
+  pressable: true,
+  init: { scale: 1 },
+  press: { scale: 0.8 }
+});
+
 
 class App extends Component {
   constructor() {
@@ -50,9 +56,7 @@ class App extends Component {
         <div className="App" id="App">
         <PoseGroup>
           {this.state.isVisible && [
-            <ChapterOne key={uniqid()} className="story-paragraph">
-              A low frequency drone radiated from somewhere in the room, rattling his bones in a rhythmic pulse. He scanned, looking for a door, a window, a corner. Nothing. The soles of his shoes rested on a floor that was firm but not really there.
-            </ChapterOne>
+            <Box key={uniqid()} className="box"/>
           ]}
         </PoseGroup>
         </div >
